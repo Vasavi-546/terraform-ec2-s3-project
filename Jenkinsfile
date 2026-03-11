@@ -3,29 +3,29 @@ pipeline {
 
     stages {
 
-        stage('Checkout Code') {
+        stage('Terraform Init') {
             steps {
-                git branch: 'main',
-                url: 'https://github.com/Vasavi-546/terraform-ec2-s3-project.git'
+                sh '/opt/homebrew/bin/terraform init'
             }
         }
 
-        stage('Terraform Init') {
+        stage('Terraform Validate') {
             steps {
-                sh 'terraform init'
+                sh '/opt/homebrew/bin/terraform validate'
             }
         }
 
         stage('Terraform Plan') {
             steps {
-                sh 'terraform plan'
+                sh '/opt/homebrew/bin/terraform plan'
             }
         }
 
         stage('Terraform Apply') {
             steps {
-                sh 'terraform apply -auto-approve'
+                sh '/opt/homebrew/bin/terraform apply -auto-approve'
             }
         }
+
     }
 }
